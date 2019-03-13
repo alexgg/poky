@@ -1,13 +1,13 @@
 DEFAULTTUNE ?= "armv8a-crc"
 
 TUNEVALID[armv8a] = "Enable instructions for ARMv8-a"
-TUNE_CCARGS .= "${@bb.utils.contains('TUNE_FEATURES', 'armv8a', ' -march=armv8-a', '', d)}"
+TUNE_MARCH .= "${@bb.utils.contains('TUNE_FEATURES', 'armv8a', ' -march=armv8-a', '', d)}"
 TUNEVALID[simd] = "Enable instructions for ARMv8-a Advanced SIMD and floating-point"
-TUNE_CCARGS .= "${@bb.utils.contains('TUNE_FEATURES', 'simd', '+simd', '', d)}"
+TUNE_MARCH .= "${@bb.utils.contains('TUNE_FEATURES', 'simd', '+simd', '', d)}"
 TUNEVALID[crc] = "Enable instructions for ARMv8-a Cyclic Redundancy Check (CRC)"
-TUNE_CCARGS .= "${@bb.utils.contains('TUNE_FEATURES', 'crc', '+crc', '', d)}"
+TUNE_MARCH .= "${@bb.utils.contains('TUNE_FEATURES', 'crc', '+crc', '', d)}"
 TUNEVALID[crypto] = "Enable instructions for ARMv8-a cryptographic"
-TUNE_CCARGS .= "${@bb.utils.contains('TUNE_FEATURES', 'crypto', '+crypto', '', d)}"
+TUNE_MARCH .= "${@bb.utils.contains('TUNE_FEATURES', 'crypto', '+crypto', '', d)}"
 MACHINEOVERRIDES =. "${@bb.utils.contains('TUNE_FEATURES', 'armv8a', 'armv8a:', '' ,d)}"
 
 require conf/machine/include/arm/arch-arm64.inc
